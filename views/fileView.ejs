@@ -1,0 +1,34 @@
+<%- include('includes/layout.ejs') %>
+    <div class="file__details">
+      <h1><%= fileName %></h1>
+      <p class="search">
+        <input type="text" placeholder="Search" id="searchInput"> 
+        <button id="searchIcon" type="button">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </p>  
+      <p style="text-align: right; margin-top: 0; font-weight: 500;" id="searchResults"></p>
+      </div>
+      <div class="uploader__info">
+        <table class="table">
+          <thead>
+            <tr>
+              <% for( let head of header) { %>
+              <th scope="col"><%= head %></th>
+              <% } %>
+            </tr>
+          </thead>
+          <tbody>
+            <% for(let row of data) { %>
+            <tr>
+                <% for(let key of Object.keys(row)) { %>
+                    <td><%= row[key] %></td>
+                <% } %>
+            </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    <script type="text/javascript"  src="/js/fileview.js"></script>
+  </body>
+</html>

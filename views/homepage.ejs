@@ -1,0 +1,55 @@
+<%- include('includes/layout.ejs') %>
+    <div class="container">
+      <div>
+        <img src="/assets/bg.png" alt="background image" />
+      </div>
+      <div class="upload_form">
+        <div>
+          <h1>Upload File</h1>
+          <h4>Landing Page</h4>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam
+            reprehenderit eos, ex recusandae aliquam minima error corporis
+            expedita asperiores! Ducimus fugiat odio pariatur iste voluptatibus
+            sequi voluptas quaerat rem magni!
+          </p>
+        </div>
+        <form action="/upload" method="post" class="form-group" enctype="multipart/form-data">
+          <input type="file" name="file" id="file" class="input-file"/>
+          <button>Upload</button>
+        </form>
+        <p style="text-align: center; color: red;"><%= error %></p>
+      </div>
+    </div>
+    <% if(files.length) { %>
+    <div class="files__section">
+      <h1>Files</h1>
+      <div class="files">
+        <% for(let file of files) { %>
+        <div class="card">
+          <div class="card__content">
+            <div class="card__body">
+              <a href="/view/<%= file._id %>">
+                <h1><%= file.fileName %></h1>
+              </a>
+              <form action="/delete" method="POST">
+                <input type="hidden" value="<%= file._id %>" name="deleteFileId" />
+                <button>
+                  <i class="fa-solid fa-trash fa-xl" style="color: #e2334c"></i>
+                </button>
+              </form>
+              
+            </div>
+            <div class="card__details">
+              <p><%= file.createdAt.toLocaleDateString() %></p>
+              <p><%= file.createdAt.toLocaleTimeString() %></p>
+            </div>
+          </div>
+        </div>
+        <% } %>
+      </div>
+    </div>
+    <% } %>
+    <script type="text/javascript"  src="/js/fileview.js"></script>
+  </body>
+</html>
